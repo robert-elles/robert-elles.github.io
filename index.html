@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Radio</title>
+  <style>
+
+    .song {
+      clear: left;
+      margin: 1 0;
+    }
+
+    .song input {
+      margin: 0 1em .5em 0;
+      float: left;
+      padding: 0;
+    }
+
+    .song p {
+      margin: 0 0 1.5em 0;
+    }
+
+    .song:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: left;
+      visibility: hidden;
+    }
+
+    audio {
+      margin: 0;
+      min-width: 0
+    }
+
+    @media only screen and (min-device-width: 640px) {
+      audio {
+        max-width: 100%;
+      }
+    }
+
+    @media only screen
+    and (min-device-width: 640px)
+    and (max-device-width: 640px)
+    and (-webkit-min-device-pixel-ratio: 2)
+    and (orientation: portrait) {
+      audio {
+        max-width: 10em;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<div class="playlist_container">
+  <div class="song" tabindex="0" onclick="play(1)" onkeypress="play(1)">
+    <h3 id="radio_eins;1_9">Radio Eins</h3>
+    <input tabindex="0" onclick="this.blur()" onkeypress="play(1)" type="image"
+           src="images/radioeins.png" width="740" height="220"
+           alt="Stream: Radio Eins (Play / Pause)" style="background: none;">
+    <audio style="display: block;" id="1"
+           src="https://rbb-edge-2076-fra-lg-cdn.cast.addradio.de/rbb/radioeins/live/mp3/128/stream.mp3"
+           preload="none">
+    </audio>
+  </div>
+  <div class="song" tabindex="0" onclick="play(2)" onkeypress="play(2)">
+    <h3 id="dueschlandfunk;2_10">Deuschlandfunk</h3>
+    <input tabindex="0" onclick="this.blur()" onkeypress="play(2)" type="image"
+           src="images/deuschlandfunk.png" width="740" height="220" alt="Stream: deuschlandfunk (Play / Pause)"
+           style="background: none;">
+    <audio style="display: none;" id="2"
+           src="https://st01.sslstream.dlf.de/dlf/01/64/mp3/stream.mp3"
+           preload="none">
+    </audio>
+  </div>
+  <div class="song" tabindex="0" onclick="play(5)" onkeypress="play(5)">
+    <h3 id="df_kultur;5_10">Deuschlandfunk Kultur</h3>
+    <input tabindex="0" onclick="this.blur()" onkeypress="play(5)" type="image"
+           src="images/df_kultur.png" width="740" height="220" alt="Stream: df_kultur (Play / Pause)"
+           style="background: none;">
+    <audio style="display: none;" id="5"
+           src="https://st02.sslstream.dlf.de/dlf/02/128/mp3/stream.mp3"
+           preload="none">
+    </audio>
+  </div>
+  <div class="song" tabindex="0" onclick="play(6)" onkeypress="play(6)">
+    <h3 id="df_nova;6_10">Deuschlandfunk Nova</h3>
+    <input tabindex="0" onclick="this.blur()" onkeypress="play(6)" type="image"
+           src="images/df_nova.png" width="740" height="220" alt="Stream: df_nova (Play / Pause)"
+           style="background: none;">
+    <audio style="display: none;" id="6"
+           src="https://st03.sslstream.dlf.de/dlf/03/128/mp3/stream.mp3"
+           preload="none">
+    </audio>
+  </div>
+  <div class="song" tabindex="0" onclick="play(3)" onkeypress="play(3)">
+    <h3 id="fm4;3_10">FM4</h3>
+    <input tabindex="0" onclick="this.blur()" onkeypress="play(3)" type="image"
+           src="images/fm4.png" width="740" height="220" alt="Stream: fm4 (Play / Pause)"
+           style="background: none;">
+    <audio style="display: none;" id="3"
+           src="http://mp3stream1.apasf.apa.at/;stream.mp3"
+           preload="none">
+    </audio>
+  </div>
+  <div class="song" tabindex="0" onclick="play(4)" onkeypress="play(4)">
+    <h3 id="fritz;4_10">FM4</h3>
+    <input tabindex="0" onclick="this.blur()" onkeypress="play(4)" type="image"
+           src="images/fritz.png" width="740" height="220" alt="Stream: fritz (Play / Pause)"
+           style="background: none;">
+    <audio style="display: none;" id="4"
+           src="https://rbb-edge-20b4-fra-lg-cdn.cast.addradio.de/rbb/fritz/live/mp3/mid"
+           preload="none">
+    </audio>
+  </div>
+
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
+  <script>
+    jQuery(document).ready(function ($) {
+      $("audio").on("play", function (me) {
+        $("audio").each(function (i, e) {
+          if (e !== me.currentTarget) {
+            this.pause();
+            this.currentTime = 0;
+          }
+        });
+      });
+    })
+
+    function play(e) {
+      var de = document.getElementById(e);
+
+      var div = document.getElementsByClassName('playlist_container')[0];
+
+      // alle Buttons löschen
+      var number = div.getElementsByTagName('input').length;
+      for (var i = 0, n = number; i < n; i++) {
+        div.getElementsByTagName('input')[i].style.background = "none";
+      }
+
+      if (de.paused) {
+        // Cachen eines streams vermeiden: (nur, wenn die JavaScript Funktionalität verwendet wird, und nicht, wenn die nativen audio-controls benutzt werden)
+        url = de.src.split("?")[0];
+        var de1 = url + "?" + new Date().getTime();
+        document.getElementById(e).src = de1;
+
+        // aktiven Sender mit einem Button kennzeichnen:
+        div.getElementsByTagName('input')[e
+        - 1].style.background = "url('/images/button_12.png') no-repeat 2px 2px / 12px";
+
+        de.play();
+        de.style.display = "block";
+        de.onended = function () {
+          if (document.getElementById(e + 1)) {
+            play(e + 1);
+          } else {
+            play(1);
+          }
+        }
+      } else {
+        de.pause();
+      }
+    }
+  </script>
+</body>
+</html>

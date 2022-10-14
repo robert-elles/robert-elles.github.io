@@ -4,22 +4,22 @@
   <title>Radio</title>
   <style>
 
-    .song {
+    .radio_station {
       clear: left;
       margin: 1 0;
     }
 
-    .song input {
+    .radio_station input {
       margin: 0 1em .5em 0;
       float: left;
       padding: 0;
     }
 
-    .song p {
+    .radio_station p {
       margin: 0 0 1.5em 0;
     }
 
-    .song:after {
+    .radio_station:after {
       content: ".";
       display: block;
       height: 0;
@@ -58,7 +58,7 @@
 <body style="background-color:black;">
 <div class="playlist_container">
   <iframe src="http://www.radioeins.de/livemp3" id="player" title="description" style="width: 700px"></iframe>
-  <div class="song" tabindex="0" onclick="play(1)" onkeypress="play(1)">
+  <div class="radio_station" tabindex="0" onclick="play(1)" onkeypress="play(1)">
     <input tabindex="0" onclick="this.blur()" onkeypress="play(1)" type="image"
            src="images/radioeins.png"
            alt="Stream: Radio Eins (Play / Pause)" style="background: none; width:700px;">
@@ -67,7 +67,7 @@
            preload="none">
     </audio>
   </div>
-  <div class="song" tabindex="0" onclick="play(2)" onkeypress="play(2)">
+  <div class="radio_station" tabindex="0" onclick="play(2)" onkeypress="play(2)">
     <input tabindex="0" onclick="this.blur()" onkeypress="play(2)" type="image"
            src="images/cosmo.png"
            alt="Stream: Cosmo (Play / Pause)" style=" background: none; width:700px;">
@@ -76,7 +76,7 @@
            preload="none">
     </audio>
   </div>
-  <div class="song" tabindex="0" onclick="play(3)" onkeypress="play(3)">
+  <div class="radio_station" tabindex="0" onclick="play(3)" onkeypress="play(3)">
     <input tabindex="0" onclick="this.blur()" onkeypress="play(3)" type="image"
            src="images/deuschlandfunk.png" alt="Stream: deuschlandfunk (Play / Pause)"
            style=" background: none; width:700px;">
@@ -85,7 +85,7 @@
            preload="none">
     </audio>
   </div>
-  <div class="song" tabindex="0" onclick="play(4)" onkeypress="play(4)">
+  <div class="radio_station" tabindex="0" onclick="play(4)" onkeypress="play(4)">
     <input tabindex="0" onclick="this.blur()" onkeypress="play(4)" type="image"
            src="images/fm4.png" alt="Stream: fm4 (Play / Pause)"
            style=" background: none; width:700px;">
@@ -94,7 +94,7 @@
            preload="none">
     </audio>
   </div>
-  <div class="song" tabindex="0" onclick="play(5)" onkeypress="play(5)">
+  <div class="radio_station" tabindex="0" onclick="play(5)" onkeypress="play(5)">
     <input tabindex="0" onclick="this.blur()" onkeypress="play(5)" type="image"
            src="images/fritz.png" alt="Stream: fritz (Play / Pause)"
            style=" background: none; width:700px;">
@@ -103,7 +103,7 @@
            preload="none">
     </audio>
   </div>
-  <div class="song" tabindex="0" onclick="play(6)" onkeypress="play(6)">
+  <div class="radio_station" tabindex="0" onclick="play(6)" onkeypress="play(6)">
     <input tabindex="0" onclick="this.blur()" onkeypress="play(6)" type="image"
            src="images/df_kultur.png" alt="Stream: df_kultur (Play / Pause)"
            style=" background: none; width:700px;">
@@ -112,7 +112,7 @@
            preload="none">
     </audio>
   </div>
-  <div class="song" tabindex="0" onclick="play(7)" onkeypress="play(7)">
+  <div class="radio_station" tabindex="0" onclick="play(7)" onkeypress="play(7)">
     <input tabindex="0" onclick="this.blur()" onkeypress="play(7)" type="image"
            src="images/df_nova.png" alt="Stream: df_nova (Play / Pause)"
            style=" background: none; width:700px;">

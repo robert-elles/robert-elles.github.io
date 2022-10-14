@@ -57,6 +57,7 @@
 </head>
 <body style="background-color:black;">
 <div class="playlist_container">
+  <iframe src="http://www.radioeins.de/livemp3" id="player" title="description" style="width: 700px"></iframe>
   <div class="song" tabindex="0" onclick="play(1)" onkeypress="play(1)">
     <input tabindex="0" onclick="this.blur()" onkeypress="play(1)" type="image"
            src="images/radioeins.png"
@@ -80,7 +81,7 @@
            src="images/deuschlandfunk.png" alt="Stream: deuschlandfunk (Play / Pause)"
            style=" background: none; width:700px;">
     <audio style="display: none;" id="3"
-           src="https://st01.sslstream.dlf.de/dlf/01/128/mp3/stream.mp3?aggregator=web"
+           src="https://st01.sslstream.dlf.de/dlf/01/128/mp3/stream.mp3"
            preload="none">
     </audio>
   </div>
@@ -89,7 +90,8 @@
            src="images/fm4.png" alt="Stream: fm4 (Play / Pause)"
            style=" background: none; width:700px;">
     <audio style="display: none;" id="4"
-           src="https://orf-live.ors-shoutcast.at/fm4-q2a"
+           src="https://orf-live.ors-shoutcast.at/fm4-q1a"
+           <!-- src="https://orf-live.ors-shoutcast.at/fm4-q2a" -->
            preload="none">
     </audio>
   </div>
@@ -98,7 +100,7 @@
            src="images/fritz.png" alt="Stream: fritz (Play / Pause)"
            style=" background: none; width:700px;">
     <audio style="display: none;" id="5"
-           src="https://rbb-edge-20b4-fra-lg-cdn.cast.addradio.de/rbb/fritz/live/mp3/mid"
+           src="https://f121.rndfnk.com/ard/rbb/fritz/live/mp3/128/stream.mp3"
            preload="none">
     </audio>
   </div>
@@ -135,8 +137,7 @@
     })
 
     function play(e) {
-      var de = document.getElementById(e);
-
+      var audio = document.getElementById(e);
       var div = document.getElementsByClassName('playlist_container')[0];
 
       // alle Buttons löschen
@@ -145,27 +146,32 @@
         div.getElementsByTagName('input')[i].style.background = "none";
       }
 
-      if (de.paused) {
+      if (audio.paused) {
         // Cachen eines streams vermeiden: (nur, wenn die JavaScript Funktionalität verwendet wird, und nicht, wenn die nativen audio-controls benutzt werden)
-        url = de.src.split("?")[0];
-        var de1 = url + "?" + new Date().getTime();
-        document.getElementById(e).src = de1;
+        url = audio.src.split("?")[0];
+        // var de1 = url + "?" + new Date().getTime();
+        document.getElementById(e).src = url;
 
         // aktiven Sender mit einem Button kennzeichnen:
-        div.getElementsByTagName('input')[e
-        - 1].style.background = "url('/images/button_12.png') no-repeat 2px 2px / 12px";
+        // div.getElementsByTagName('input')[e-1].style.background = "url('images/play_button.png') no-repeat 2px 2px / 12px";
+        div.style.background = "url('images/play_button.png') no-repeat 4px 4px / 12px";
 
-        de.play();
-        de.style.display = "block";
-        de.onended = function () {
-          if (document.getElementById(e + 1)) {
-            play(e + 1);
-          } else {
-            play(1);
-          }
+        var player = document.getElementById('player')
+        player.src = url
+        // var video = player.getElementsByTagName('video')
+        // video.autoplay = "autoplay";
+        // video.play();
+        audio.style.display = "block";
+        audio.onended = function () {
+          play(e)
+          // if (document.getElementById(e + 1)) {
+            // play(e + 1);
+          // } else {
+            // play(1);
+          // }
         }
       } else {
-        de.pause();
+        audio.pause();
       }
     }
   </script>

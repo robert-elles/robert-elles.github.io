@@ -9,7 +9,17 @@
       margin: 1 0;
     }
 
-    .radio_station input {
+    .radio_station a {
+      background: none;
+      width:700px;
+      margin: 0 1em .5em 0;
+      float: left;
+      padding: 0;
+    }
+
+    .radio_station a input {
+      background: none;
+      width:700px;
       margin: 0 1em .5em 0;
       float: left;
       padding: 0;
@@ -27,14 +37,10 @@
       visibility: hidden;
     }
 
-    audio {
-      margin: 0;
-      min-width: 0
-    }
-
     body {
       width: 75%;
       margin: 0 auto;
+      background-color:black;
     }
 
     @media only screen and (min-device-width: 640px) {
@@ -55,125 +61,42 @@
 
   </style>
 </head>
-<body style="background-color:black;">
 <div class="playlist_container">
-  <iframe src="http://www.radioeins.de/livemp3" id="player" title="description" style="width: 700px"></iframe>
-  <div class="radio_station" tabindex="0" onclick="play(1)" onkeypress="play(1)">
-    <input tabindex="0" onclick="this.blur()" onkeypress="play(1)" type="image"
-           src="images/radioeins.png"
-           alt="Stream: Radio Eins (Play / Pause)" style="background: none; width:700px;">
-    <audio style="display: block;" id="1"
-           src="http://www.radioeins.de/livemp3"
-           preload="none">
-    </audio>
+  <div class="radio_station">
+    <a href="http://www.radioeins.de/livemp3">
+      <input type="image" src="images/radioeins.png">
+    </a>
   </div>
-  <div class="radio_station" tabindex="0" onclick="play(2)" onkeypress="play(2)">
-    <input tabindex="0" onclick="this.blur()" onkeypress="play(2)" type="image"
-           src="images/cosmo.png"
-           alt="Stream: Cosmo (Play / Pause)" style=" background: none; width:700px;">
-    <audio style="display: block;" id="2"
-           src="https://wdr-cosmo-live.icecastssl.wdr.de/wdr/cosmo/live/mp3/128/stream.mp3"
-           preload="none">
-    </audio>
+  <div class="radio_station">
+    <a href="https://wdr-cosmo-live.icecastssl.wdr.de/wdr/cosmo/live/mp3/128/stream.mp3">
+      <input type="image" src="images/cosmo.png">
+    </a>
   </div>
-  <div class="radio_station" tabindex="0" onclick="play(3)" onkeypress="play(3)">
-    <input tabindex="0" onclick="this.blur()" onkeypress="play(3)" type="image"
-           src="images/deuschlandfunk.png" alt="Stream: deuschlandfunk (Play / Pause)"
-           style=" background: none; width:700px;">
-    <audio style="display: none;" id="3"
-           src="https://st01.sslstream.dlf.de/dlf/01/128/mp3/stream.mp3"
-           preload="none">
-    </audio>
+  <div class="radio_station">
+    <a href="https://st01.sslstream.dlf.de/dlf/01/128/mp3/stream.mp3">
+      <input type="image" src="images/deutschlandfunk.png">
+    </a>
   </div>
-  <div class="radio_station" tabindex="0" onclick="play(4)" onkeypress="play(4)">
-    <input tabindex="0" onclick="this.blur()" onkeypress="play(4)" type="image"
-           src="images/fm4.png" alt="Stream: fm4 (Play / Pause)"
-           style=" background: none; width:700px;">
-    <audio style="display: none;" id="4"
-           src="https://orf-live.ors-shoutcast.at/fm4-q2a"
-           preload="none">
-    </audio>
+  <!-- <div class="radio_station">
+    <a href="https://orf-live.ors-shoutcast.at/fm4-q2a">
+      <input type="image" src="images/fm4.png">
+    </a>
   </div>
-  <div class="radio_station" tabindex="0" onclick="play(5)" onkeypress="play(5)">
-    <input tabindex="0" onclick="this.blur()" onkeypress="play(5)" type="image"
-           src="images/fritz.png" alt="Stream: fritz (Play / Pause)"
-           style=" background: none; width:700px;">
-    <audio style="display: none;" id="5"
-           src="https://f121.rndfnk.com/ard/rbb/fritz/live/mp3/128/stream.mp3"
-           preload="none">
-    </audio>
+  <div class="radio_station">
+    <a href="https://f121.rndfnk.com/ard/rbb/fritz/live/mp3/128/stream.mp3">
+      <input type="image" src="images/fritz.png">
+    </a>
+  </div> -->
+  <div class="radio_station">
+    <a href="https://st02.sslstream.dlf.de/dlf/02/128/mp3/stream.mp3">
+      <input type="image" src="images/df_kultur.png">
+    </a>
   </div>
-  <div class="radio_station" tabindex="0" onclick="play(6)" onkeypress="play(6)">
-    <input tabindex="0" onclick="this.blur()" onkeypress="play(6)" type="image"
-           src="images/df_kultur.png" alt="Stream: df_kultur (Play / Pause)"
-           style=" background: none; width:700px;">
-    <audio style="display: none;" id="6"
-           src="https://st02.sslstream.dlf.de/dlf/02/128/mp3/stream.mp3"
-           preload="none">
-    </audio>
+  <div class="radio_station">
+    <a href="https://st03.sslstream.dlf.de/dlf/03/128/mp3/stream.mp3">
+      <input type="image" src="images/df_nova.png">
+    </a>
   </div>
-  <div class="radio_station" tabindex="0" onclick="play(7)" onkeypress="play(7)">
-    <input tabindex="0" onclick="this.blur()" onkeypress="play(7)" type="image"
-           src="images/df_nova.png" alt="Stream: df_nova (Play / Pause)"
-           style=" background: none; width:700px;">
-    <audio style="display: none;" id="7"
-           src="https://st03.sslstream.dlf.de/dlf/03/128/mp3/stream.mp3"
-           preload="none">
-    </audio>
-  </div>
-
-  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
-  <script>
-    jQuery(document).ready(function ($) {
-      $("audio").on("play", function (me) {
-        $("audio").each(function (i, e) {
-          if (e !== me.currentTarget) {
-            this.pause();
-            this.currentTime = 0;
-          }
-        });
-      });
-    })
-
-    function play(e) {
-      var audio = document.getElementById(e);
-      var div = document.getElementsByClassName('playlist_container')[0];
-
-      // alle Buttons löschen
-      var number = div.getElementsByTagName('input').length;
-      for (var i = 0, n = number; i < n; i++) {
-        div.getElementsByTagName('input')[i].style.background = "none";
-      }
-
-      if (audio.paused) {
-        // Cachen eines streams vermeiden: (nur, wenn die JavaScript Funktionalität verwendet wird, und nicht, wenn die nativen audio-controls benutzt werden)
-        url = audio.src.split("?")[0];
-        // var de1 = url + "?" + new Date().getTime();
-        document.getElementById(e).src = url;
-
-        // aktiven Sender mit einem Button kennzeichnen:
-        // div.getElementsByTagName('input')[e-1].style.background = "url('images/play_button.png') no-repeat 2px 2px / 12px";
-        div.style.background = "url('images/play_button.png') no-repeat 4px 4px / 12px";
-
-        var player = document.getElementById('player')
-        player.src = url
-        // var video = player.getElementsByTagName('video')
-        // video.autoplay = "autoplay";
-        // video.play();
-        audio.style.display = "block";
-        audio.onended = function () {
-          play(e)
-          // if (document.getElementById(e + 1)) {
-            // play(e + 1);
-          // } else {
-            // play(1);
-          // }
-        }
-      } else {
-        audio.pause();
-      }
-    }
-  </script>
 </div>
 </body>
 </html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Radio</title>
+  <style>
+
+    .radio_station {
+      clear: left;
+      margin: 1 0;
+    }
+
+    .radio_station input {
+      background: none;
+      width:700px;
+      margin: 0 1em .5em 0;
+      float: left;
+      padding: 0;
+    }
+
+    .radio_station:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: left;
+      visibility: hidden;
+    }
+
+    #player {
+      background: none;
+      width:700px;
+      height: 200px;
+      margin: 0 1em .5em 0;
+      float: left;
+      padding: 0;
+    }
+
+    #volume {
+      width:700px;
+      height: 500px;
+
+    }
+
+    /* #player_box {
+      background: none;
+      width:800px;
+      height: 500px;
+      margin: 0 1em .5em 0;
+      float: left;
+      padding: 0;
+    } */
+
+    body {
+      width: 75%;
+      margin: 0 auto;
+      background-color:black;
+    }
+
+    @media only screen and (min-device-width: 640px) {
+      audio {
+        max-width: 80%;
+      }
+    }
+
+    @media only screen
+    and (min-device-width: 640px)
+    and (max-device-width: 640px)
+    and (-webkit-min-device-pixel-ratio: 2)
+    and (orientation: portrait) {
+      audio {
+        max-width: 10em;
+      }
+    }
+
+  .slidecontainer {
+    width: 700px; /* Width of the outside container */
+  }
+
+  /* The slider itself */
+  .slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 50px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 50px; /* Set a specific slider handle width */
+    height: 50px; /* Slider handle height */
+    background: #04AA6D; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+
+  .slider::-moz-range-thumb {
+    width: 50px; /* Set a specific slider handle width */
+    height: 50px; /* Slider handle height */
+    background: #04AA6D; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  </style>
+</head>
+<body>
+  <!-- <iframe src="./play.html"> -->
+    <audio id="player" controls autoplay title="Player">
+      <source src="http://www.radioeins.de/livemp3" type="audio/mpeg">
+    </audio>
+    <div class="slidecontainer">
+      <input type="range" min="0" max="100" value="50" class="slider" id="volume">
+    </div>
+    <!-- </iframe> -->
+  <div class="playlist_container">
+    <div class="radio_station">
+      <input type="image"
+        src="images/radioeins.png"
+        value="http://www.radioeins.de/livemp3">
+    </div>
+    <div class="radio_station">
+      <input type="image"
+        src="images/cosmo.png"
+        value="https://wdr-cosmo-live.icecastssl.wdr.de/wdr/cosmo/live/mp3/128/stream.mp3">
+    </div>
+    <div class="radio_station">
+      <input type="image"
+        src="images/deutschlandfunk.png"
+        value="https://st01.sslstream.dlf.de/dlf/01/128/mp3/stream.mp3">
+    </div>
+    <!-- <div class="radio_station">
+      <a href="https://orf-live.ors-shoutcast.at/fm4-q2a">
+        <input type="image" src="images/fm4.png">
+      </a>
+    </div>
+    <div class="radio_station">
+      <a href="https://f121.rndfnk.com/ard/rbb/fritz/live/mp3/128/stream.mp3">
+        <input type="image" src="images/fritz.png">
+      </a>
+    </div> -->
+    <div class="radio_station">
+      <input type="image"
+        src="images/df_kultur.png"
+        value="https://st02.sslstream.dlf.de/dlf/02/128/mp3/stream.mp3">
+    </div>
+    <div class="radio_station">
+      <input type="image"
+        src="images/df_nova.png"
+        value="https://st03.sslstream.dlf.de/dlf/03/128/mp3/stream.mp3">
+    </div>
+  </div>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
+  <script>
+
+    jQuery(document).ready(function ($) {
+      $("input").on("click", function (me) {
+        var player = document.getElementById("player")
+        player.src = me.target.value 
+        player.poster = me.target.src
+        player.play()
+      });
+
+      var slider = document.getElementById("volume");
+      // var output = document.getElementById("demo");
+      // output.innerHTML = slider.value; // Display the default slider value
+      var player = document.getElementById("player")
+      player.volume = slider.value / 100
+
+      // Update the current slider value (each time you drag the slider handle)
+      slider.oninput = function(em) {
+        player.volume = em.target.value / 100;
+      }
+    })
+
+//     <!-- <div class="song" tabindex="0" onclick="play(7)" onkeypress="play(7)">
+//     <input tabindex="0" onclick="this.blur()" onkeypress="play(7)" type="image"
+//            src="images/df_nova.png" alt="Stream: df_nova (Play / Pause)"
+//            style=" background: none; width:700px;">
+//     <audio style="display: none;" id="7"
+//            src="https://st03.sslstream.dlf.de/dlf/03/128/mp3/stream.mp3"
+//            preload="none">
+//     </audio>
+//   </div>
+// -->
+
+// jQuery(document).ready(function ($) {
+//       $("a").on("click", function (me) {
+//         $("#player").each(function (i, element) {
+//           element.src = me.href;
+//         });
+//       });
+//     })
+
+    // jQuery(document).ready(function ($) {
+    //   $("audio").on("play", function (me) {
+    //     $("audio").each(function (i, e) {
+    //       if (e !== me.currentTarget) {
+    //         this.pause();
+    //         this.currentTime = 0;
+    //       }
+    //     });
+    //   });
+    // })
+
+    // function play(e) {
+    //   var audio = document.getElementById(e);
+    //   var div = document.getElementsByClassName('playlist_container')[0];
+
+    //   // alle Buttons löschen
+    //   var number = div.getElementsByTagName('input').length;
+    //   for (var i = 0, n = number; i < n; i++) {
+    //     div.getElementsByTagName('input')[i].style.background = "none";
+    //   }
+
+    //   if (audio.paused) {
+    //     // Cachen eines streams vermeiden: (nur, wenn die JavaScript Funktionalität verwendet wird, und nicht, wenn die nativen audio-controls benutzt werden)
+    //     url = audio.src.split("?")[0];
+    //     // var de1 = url + "?" + new Date().getTime();
+    //     document.getElementById(e).src = url;
+
+    //     // aktiven Sender mit einem Button kennzeichnen:
+    //     // div.getElementsByTagName('input')[e-1].style.background = "url('images/play_button.png') no-repeat 2px 2px / 12px";
+    //     div.style.background = "url('images/play_button.png') no-repeat 4px 4px / 12px";
+
+    //     var player = document.getElementById('player')
+    //     player.src = url
+    //     // var video = player.getElementsByTagName('video')
+    //     // video.autoplay = "autoplay";
+    //     // video.play();
+    //     audio.style.display = "block";
+    //     audio.onended = function () {
+    //       play(e)
+    //       // if (document.getElementById(e + 1)) {
+    //         // play(e + 1);
+    //       // } else {
+    //         // play(1);
+    //       // }
+    //     }
+    //   } else {
+    //     audio.pause();
+    //   }
+    // }
+  </script>
+</body>
+</html>
